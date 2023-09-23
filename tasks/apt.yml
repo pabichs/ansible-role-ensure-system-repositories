@@ -1,0 +1,22 @@
+---
+- name: Download key
+  ansible.builtin.get_url:
+    dest: "{{ item.key_dest }}"
+    group: root
+    mode: "644"
+    owner: root
+    url: "{{ item.key_url }}"
+  when: item.key_url is defined
+
+- name: Setup sources file
+  ansible.builtin.apt_repository:
+    codename: "{{ item.codename | default(omit) }}"
+    filename: "{{ item.filename | default(omit) }}"
+    install_python_apt: "{{ item.install_python_apt | default(omit) }}"
+    mode: "{{ item.mode | default(omit) }}"
+    repo: "{{ item.repo }}"
+    state: "{{ item.state | default(omit) }}"
+    update_cache: "{{ item.update_cache | default(omit) }}"
+    update_cache_retries: "{{ item.update_cache_retries | default(omit) }}"
+    update_cache_retry_max_delay: "{{ item.update_cache_retry_max_delay | default(omit) }}"
+    validate_certs: "{{ item.validate_certs | default(omit) }}"

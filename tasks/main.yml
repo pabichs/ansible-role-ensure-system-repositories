@@ -1,0 +1,19 @@
+---
+- name: Ensure keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "755"
+    owner: root
+    group: root
+  when: create_keyrings_directory and ansible_pkg_mgr == 'apt'
+
+- name: Setup apt repositories
+  ansible.builtin.include_tasks: apt.yml
+  loop: "{{ system_repositories }}"
+  when: ansible_pkg_mgr == 'apt' and system_repositories is defined
+
+- name: Setup yum repositories
+  ansible.builtin.include_tasks: yum.yml
+  loop: "{{ system_repositories }}"
+  when: (ansible_pkg_mgr == 'yum' or ansible_pkg_mgr == 'dnf') and system_repositories is defined

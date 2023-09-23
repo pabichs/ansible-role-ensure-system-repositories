@@ -1,0 +1,21 @@
+galaxy_info:
+  role_name: ensure_system_repositories
+  author: Sebastian Pabich
+  description: Abstracts apt_repository and yum_repository
+  license: license (BSD, MIT)
+  min_ansible_version: 2.1
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - system
+    - packaging
+    - linux
+dependencies: []
