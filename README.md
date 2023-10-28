@@ -29,7 +29,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: elvax.ensure_system_repositories
+    - role: pabichs.ensure_system_repositories
       vars:
         system_repositories:
           - key_url: "https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key"
@@ -44,7 +44,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: elvax.ensure_system_repositories
+    - role: pabichs.ensure_system_repositories
       vars:
         system_repositories:
           - name: kubernetes
