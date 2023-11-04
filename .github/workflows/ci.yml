@@ -1,0 +1,16 @@
+name: CI
+on: [push]
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install test dependencies
+        run: python3 -m pip install --user ansible-lint==6.21.1
+      - name: Lint
+        run: ansible-lint .
