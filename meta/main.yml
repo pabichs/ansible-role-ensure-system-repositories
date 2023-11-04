@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: ensure_system_repositories
+  namespace: pabichs
   author: Sebastian Pabich
   description: Abstracts apt_repository and yum_repository
   license: license (BSD, MIT)
