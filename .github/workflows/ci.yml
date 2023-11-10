@@ -34,18 +34,18 @@ jobs:
           - ubuntu2204
 
     steps:
-      - name: Check out the codebase.
+      - name: Check out
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.
+      - name: Set up Python 3
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install test dependencies.
+      - name: Install test dependencies
         run: python3 -m pip install --user ansible molecule molecule-plugins[docker] docker
 
-      - name: Run Molecule tests.
+      - name: Run Molecule
         run: molecule test
         env:
           PY_COLORS: '1'
