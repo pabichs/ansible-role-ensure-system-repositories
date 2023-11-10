@@ -1,6 +1,7 @@
 ---
 - name: Converge
   hosts: all
+  become: true
   tasks:
     - name: Test apt using systems
       ansible.builtin.include_role:
@@ -18,4 +19,13 @@
     - name: Test yum/dnf using systems
       ansible.builtin.include_role:
         name: pabichs.ensure_system_repositories
-      when: ansible_os_family == 'Fedora'
+      vars:
+        system_repositories:
+          - name: kubernetes
+            description: Kubernetes
+            baseurl: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+            enabled: true
+            gpgcheck: true
+            gpgkey: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+            exclude: kubelet kubeadm kubectl
+      when: ansible_os_family == 'RedHat'
