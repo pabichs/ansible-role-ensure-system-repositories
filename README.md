@@ -17,6 +17,10 @@ Role Variables
 | `create_keyrings_directory` | no       | `true`      | Controls whether to clreate `/etc/apt/keyrings` directory or not. Works only on `apt`-using systems. | 
 | `system_repositories`       | no       | _undefined_ | List of system repositories to create. Passes all arguments to `ansible.builtin.apt_repository` or `ansible.builtin.yum_repository` depending on system's package manager. |                                                              
 
+`system_repositories` 2 takes additional parameters for `apt` using systems
+beyond those in `ansible.builtin.apt`:
+- key_url - URL to download key
+- key_dest - file to download key to
 
 Dependencies
 ------------
