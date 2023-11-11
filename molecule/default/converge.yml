@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  become: true
   tasks:
     - name: Test apt using systems
       ansible.builtin.include_role:
