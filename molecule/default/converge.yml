@@ -1,0 +1,30 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Test apt using systems
+      ansible.builtin.include_role:
+        name: pabichs.ensure_system_repositories
+      vars:
+        system_repositories:
+          - key_url: https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key
+            key_dest: /etc/apt/keyrings/kubernetes.asc
+            repo: "deb [signed-by=/etc/apt/keyrings/kubernetes.asc] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /"
+            state: present
+            filename: kubernetes
+            update_cache: false
+      when: ansible_os_family == 'Debian'
+
+    - name: Test yum/dnf using systems
+      ansible.builtin.include_role:
+        name: pabichs.ensure_system_repositories
+      vars:
+        system_repositories:
+          - name: kubernetes
+            description: Kubernetes
+            baseurl: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+            enabled: true
+            gpgcheck: true
+            gpgkey: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+            exclude: kubelet kubeadm kubectl
+      when: ansible_os_family == 'RedHat'
